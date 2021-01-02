@@ -1,0 +1,194 @@
+//类图 class graph
+@startuml
+'抖音APP类
+class TikTok
+'用户抽象类
+abstract class User
+'抖音界面上的组件抽象类
+abstract class Component
+'普通用户类
+class OrdinaryUser
+'垃圾用户类
+class GarbageUser
+'认证用户
+class AuthenticatedUser
+'管理员（智能推荐系统）
+class Administrator
+
+'点赞功能
+class  Ike
+'评论功能
+class  Comment
+'分享功能
+class  Share
+'拍摄并且上传视频
+class  NewVideo
+'我的主页
+class  HomePage
+
+'抖音的组合
+TikTok *--> OrdinaryUser
+TikTok *--> GarbageUser
+TikTok *--> AuthenticatedUser
+TikTok *--> Ike
+TikTok *--> Comment
+TikTok *--> Share
+TikTok *--> NewVideo
+TikTok *--> HomePage
+TikTok *--> Administrator
+
+
+' <|代表的是继承（泛化）
+User<|-OrdinaryUser
+User<|--GarbageUser
+User<|-AuthenticatedUser
+
+'这里是抖音界面
+Component<|--Comment
+Component<|--Share
+Component<|--NewVideo
+Component<|--HomePage
+Component<|--Ike
+
+'这里是一个管理员
+
+'普通用户的聚合
+OrdinaryUser o--> Comment
+OrdinaryUser o--> Share
+OrdinaryUser o--> NewVideo
+OrdinaryUser o--> HomePage
+OrdinaryUser o--> Ike
+
+'垃圾用户的聚合
+GarbageUser o--> HomePage
+GarbageUser o--> Ike
+
+'认证用户的聚合
+AuthenticatedUser o--> Comment
+AuthenticatedUser o--> Share
+AuthenticatedUser o--> NewVideo
+AuthenticatedUser o--> HomePage
+AuthenticatedUser o--> Ike
+
+'下面就是具体的功能
+class TikTok {
+'判断手机是否入网
+verifyNetwork:boolean
+'判断手机配置是否满足要求
+verifyDeploy:boolean
+'登录用户名
+userName:String
+}
+
+'管理员（智能推荐系统）类
+class Administrator {
+'审核视频
+boolean auditVideo()
+'删除视频
+boolean deleteVideo()
+'删除用户
+boolean deleteUser()
+'降权用户
+void dropUser()
+'加权视频
+void weightVideo()
+'分发视频
+void distributeUser()
+
+}
+
+'抽象用户类
+abstract class User {
+'年龄
+int age
+'性别
+boolean sex
+'兴趣
+String interest
+'推广欲望
+Double desire
+}
+
+'普通用户类
+class OrdinaryUser {
+'年龄
+int age
+'性别
+boolean sex
+'兴趣
+String interest
+'推广欲望
+Double desire
+'点赞功能
+boolean ike()
+'评论功能
+String comment()
+'分享功能
+boolean  share()
+'拍摄并且上传视频
+void  newVideo()
+'我的主页
+void homePage()
+}
+
+'垃圾用户类
+class GarbageUser {
+'点赞功能
+boolean ike()
+'我的主页
+void homePage()
+}
+
+'普通用户类
+class AuthenticatedUser {
+'年龄
+int age
+'性别
+boolean sex
+'兴趣
+String interest
+'推广欲望
+double desire
+'工资
+double salary
+'点赞功能
+boolean ike()
+'评论功能
+String comment()
+'分享功能
+boolean  share()
+'拍摄并且上传视频
+void  newVideo()
+'我的主页
+void homePage()
+}
+
+
+'点赞功能
+class  Ike{
+boolean ike()
+}
+'评论功能
+class  Comment{
+String comment()
+}
+'分享功能
+class  Share{
+boolean  share()
+}
+'拍摄并且上传视频
+class  NewVideo{
+void  newVideo()
+}
+'我的主页
+class  HomePage{
+void homePage()
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}
+
+@enduml

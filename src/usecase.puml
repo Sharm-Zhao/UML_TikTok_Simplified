@@ -1,0 +1,54 @@
+/*
+用例图 use case graph
+/
+@startuml
+:管理员（自研推荐算法）: as Admin
+'(Use the application) as (use)
+
+用户 -> (拍摄并上传视频)
+用户 --> (看视频)
+用户 --> (正常点赞/分享)
+用户 -> (充钱推广/DOU+)
+用户 --> (刷赞/刷粉)
+
+
+Admin -> (删除视频)
+Admin -> (删除用户)
+
+
+
+note "加权视频" as N1
+(Admin) . N1
+N1 .. (拍摄并上传视频)
+
+note "审核上传视频" as N2
+(Admin) .. N2
+N2 .. (拍摄并上传视频)
+
+note "分发视频" as N3
+(Admin) ... N3
+N3 .. (看视频)
+
+note "降权用户" as N4
+(Admin) .. N4
+N4 .. (刷赞/刷粉)
+
+note "加权视频" as N5
+(Admin) .. N5
+N5 .. (充钱推广/DOU+)
+
+note "加权视频" as N6
+(Admin) . N6
+N6 . (正常点赞/分享)
+
+
+
+'note right of Admin : 备注
+
+'note right of (Use)
+'A note can also
+'be on several lines
+'end note
+
+
+@enduml
